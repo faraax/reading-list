@@ -2,11 +2,13 @@
 import BookList from '../components/BookList'
 import BookForm from '../components/BookForm'
 import { useCollection } from '../hooks/useCollection';
+import { useAuthContext } from '../hooks/useAuthContext';
 // import { db } from '../Firebase/config'
 // import { collection, getDocs } from 'firebase/firestore'
 
 export default function Home() {
-  const { documents, error } = useCollection('books')
+  const { user } = useAuthContext()
+  const { documents, error } = useCollection('books', ['uid', '==', user.uid])
   // const [books, setBooks] = useState(null)
 
   // useEffect(() => {

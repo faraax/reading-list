@@ -1,7 +1,17 @@
+import { deleteDoc, doc } from "firebase/firestore"
+import { db } from "../Firebase/config"
+
 export default function BookList({ books, error }) {
 
   const handleClick = async (id) => {
-    console.log(id)
+    const docRef = doc(db, 'books', id)
+    await deleteDoc(docRef)
+      .then(() => {
+        console.log("data deleted");
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   return (
